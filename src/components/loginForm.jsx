@@ -5,20 +5,26 @@ class LoginForm extends Component {
 
   state = {
     account: {
-      username: "",
+      username: "",     
       password: "",
     },
+    errors : {}
   };
 
   // componentDidMount() {
   //     this.username.current.focus();
   // }
-
+  validate = () => {
+    return {username : "Username is required."};
+  }
+  
   handleSubmit = (e) => {
     e.preventDefault();
-    // const username = this.username.current.value;
-    console.log("Submitted");
+    const errors = this.validate();
+    this.setState({errors})
+    if (errors) return;
   };
+
   handleChange = ({ currentTarget: input }) => {
     const account = { ...this.state.account };
     // account.username = e.currentTarget.value;
