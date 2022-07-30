@@ -8,6 +8,7 @@ import _ from "lodash";
 
 import { Table } from "react-bootstrap";
 import MoviesTable from "./moviesTable";
+import { Link } from "react-router-dom";
 
 class Movies extends Component {
   state = {
@@ -84,6 +85,15 @@ class Movies extends Component {
           />
         </div>
         <div className="col">
+          <div className="col">
+            <Link
+              to="/movies/new"
+              className="btn btn-primary"
+              style={{ marginBottom: 20 }}
+            >
+              New Movie
+            </Link>
+          </div>
           <p>Showing {totalCount} movies in the database</p>
           <MoviesTable
             movies={data}
