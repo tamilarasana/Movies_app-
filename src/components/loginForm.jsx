@@ -12,27 +12,25 @@ class LoginForm extends Component {
     errors : {}
   };
 
-  // componentDidMount() {
-  //     this.username.current.focus();
-  // }
-
   schema = {
-    username: Joi.string().required(),
-    password: Joi.string().required()
+    username: Joi.string().required().label('Username'),
+    password: Joi.string().required().label('Password')
   }
   validate = () => {
     const result  = Joi.validate(this.state.account, this.schema,{
       abortEarly:false
     });
-    console.log(result);
-
+   // console.log(result);  
+   if(!result.error) return null;
     const errors = {};
-    const {account} = this.state;
-    if(account.username.trim() === '')
-        errors.username = "Username is required.";
-    if (account.password.trim() === '')
-        errors.password = "Password is requird.";
-    return Object.keys(errors).length === 0 ? null : errors;
+    for(let item of result.error.details) errors[item.path[0]] = item.message;
+     return errors;
+    // const {account} = this.state;
+    // if(account.username.trim() === '')
+    //     errors.username = "Username is required.";
+    // if (account.password.trim() === '')
+    //     errors.password = "Password is requird.";
+    // return Object.keys(errors).length === 0 ? null : errors;
   }
   
   handleSubmit = (e) => {
